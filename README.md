@@ -1,4 +1,4 @@
 Installation
 ============
 
-    curl https://github.com/shimaore/start-dockers/install.sh | sudo /bin/bash
+    curl https://raw.githubusercontent.com/shimaore/start-dockers/master/install.sh | sudo -s
