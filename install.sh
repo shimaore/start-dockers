@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # Create user.
 /usr/sbin/useradd -m -g docker docker
 # Put in group `docker`.
