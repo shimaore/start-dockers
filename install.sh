@@ -1,8 +1,8 @@
 #!/bin/bash
 # Create user.
-useradd -m -g docker docker
+/usr/sbin/useradd -m -g docker docker
 # Put in group `docker`.
-adduser docker docker
+/usr/sbin/adduser docker docker
 # Install the startup script.
 cat > ~docker/start.sh <<'SCRIPT'
 #!/bin/bash
