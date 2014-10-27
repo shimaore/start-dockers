@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # Create user.
-/usr/sbin/useradd -m -g docker docker
+getent passwd docker >/dev/null || /usr/sbin/useradd -m -g docker docker
 # Put in group `docker`.
 /usr/sbin/adduser docker docker
 # Install the startup script.
