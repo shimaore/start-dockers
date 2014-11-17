@@ -9,6 +9,10 @@ cat > ~docker/start.sh <<'SCRIPT'
 #!/bin/bash
 echo '**** start ****' >> ~docker/startup.log
 date >> ~docker/startup.log
+until /etc/init.d/docker status; do
+  echo "Waiting for docker to be ready."
+  sleep 5;
+done
 export DOCKER_BASE=~docker/start/
 cd "${DOCKER_BASE}" && for DOCKER_NAME in [0-9]*; do
   export DOCKER_NAME
