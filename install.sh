@@ -10,7 +10,7 @@ cat > ~docker/start.sh <<'SCRIPT'
 echo '**** start ****' >> ~docker/startup.log
 date >> ~docker/startup.log
 until /etc/init.d/docker status; do
-  echo "Waiting for docker to be ready."
+  echo "Waiting for docker to be ready." >> ~docker/startup.log
   sleep 5;
 done
 export DOCKER_BASE=~docker/start/
