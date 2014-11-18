@@ -7,28 +7,30 @@ getent passwd docker >/dev/null || /usr/sbin/useradd -m -g docker --uid 9999 doc
 # Install the startup script.
 cat > ~docker/start.sh <<'SCRIPT'
 #!/bin/bash
-echo '**** start ****' >> ~docker/startup.log
-date >> ~docker/startup.log
+exec >> ~docker/startup.log 2>&1
+echo '**** start ****'
+date
 until /etc/init.d/docker status; do
-  echo "Waiting for docker to be ready." >> ~docker/startup.log
-  sleep 5;
+  echo "Waiting for docker to be ready."
+  sleep 5
 done
 export DOCKER_BASE=~docker/start/
 cd "${DOCKER_BASE}" && for DOCKER_NAME in [0-9]*; do
   export DOCKER_NAME
   (cd "${DOCKER_NAME}" && ./init start)
-done >> ~docker/startup.log
+done
 SCRIPT
 chmod +x ~docker/start.sh
 cat > ~docker/stop.sh <<'SCRIPT'
 #!/bin/bash
-echo '**** stop ****' >> ~docker/startup.log
-date >> ~docker/startup.log
+exec >> ~docker/startup.log 2>&1
+echo '**** stop ****'
+date
 export DOCKER_BASE=~docker/start/
 cd "${DOCKER_BASE}" && for DOCKER_NAME in [0-9]*; do
   export DOCKER_NAME
   (cd "${DOCKER_NAME}" && ./init stop)
-done >> ~docker/startup.log
+done
 SCRIPT
 chmod +x ~docker/stop.sh
 mkdir -p ~docker/start/
